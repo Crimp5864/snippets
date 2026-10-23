@@ -1,4 +1,4 @@
-# Bash code snippets
+# Bash code snippets and blocks
 ---
 ## Variables
 ```bash

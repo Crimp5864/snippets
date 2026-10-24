@@ -38,3 +38,6 @@ MAC Addresses:
 
 - Use case: Matching hardware MAC addresses formatted with colons or hyphens.
 
+## File & Code Patterns
+
+File Extensions

@@ -119,3 +119,13 @@ fi
 ```
 
 - Ensures a target directory exitst before changing into or reading from it.
+
+File Existence
+
+```bash
+if [[ ! -f "$CONFIG_FILE" ]]; then
+  echo "Error: Configuration file '$CONFIG_FILE' not found." >&2
+  exit 1
+fi
+
+-  Guards scripts that require reading or modifying a specific file.

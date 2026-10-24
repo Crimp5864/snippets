@@ -44,6 +44,7 @@ done
 ### Argument & Input
 
 #### Required Number of Arguments
+
 ```bash
 # Requires exactly 2 arguments.
 if [[ $# -ne 2 ]]; then
@@ -52,10 +53,29 @@ if [[ $# -ne 2 ]]; then
 fi
 
 # Requires at least 1 argument.
-if [[$# -lt 1 ]]; then
+if [[ $# -lt 1 ]]; then
   echo "Error: At least one argument is required." >&2
   exit 1
 fi
+
+#### Non-Empty Argument Check
+
+```bash
+if [[ -z "${1:-}" ]]; then
+  echo "Error: Argument 1 cannot be empty." >&2
+  exit 1
+fi
+```
+
+#### Numeric Input Validation
+
+```bash
+local input_val="$1"
+if ! [[ "$input_val" =~ ^[0-9]+$ ]]; then
+  echo "Error: Parameter '$input_val' must be a positive integer." >&2
+  exit 1
+fi
+```
 
 ## Variables Assignments
 

@@ -28,7 +28,7 @@ IPv4 Addresses:
 ^([0-9]{1,3}\.){3}[0-9]{1,3}$
 ```
 
-- jUse case: Basic validation for IP address strings.
+- Use case: Basic validation for IP address strings.
 
 MAC Addresses:
 

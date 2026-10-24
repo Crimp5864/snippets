@@ -1,16 +1,12 @@
-# Bash code snippets and blocks
+# Guard Clauses
 
-A collection of code snippets for Bash scripting. 
+A collection of guard clauses. Defensive programming patterns used at the \
+beginning of a script to fail fast, exit early, or skip execution if required \
+conditions are not met.
 
-## Guard Clauses
+## Environment & Privilege
 
-Defensive programming patterns used at the beginning of a script to fail fast, exit early, or skip execution if required conditions are not met.
-
-### Environment & Privilege
-
-#### Require root
-
-Ensures script is run as root.
+Require root
 
 ```bash
 # Require root.
@@ -20,9 +16,10 @@ if [ "$EUID" -ne 0 ]; then
 fi
 ```
 
-#### Prevent root
+- Ensures script is run as root.
 
-Ensures script is not run as root.
+
+Prevent root
 
 ```bash
 # Prevent root.
@@ -32,20 +29,24 @@ if [ "$EUID" -eq 0 ]; then
 fi
 ```
 
-#### Dependency / Command availability check
+- Ensures script is not run as root.
 
-Verifies required CLI utilities are installed.
+
+## Dependency / Command availability check
+
+Verify required CLI utilities are installed.
 
 ```bash
-# Single command check.
 if ! command -v jq &> /dev/null; then
   echo "Error: 'jq' is required but not installed." >&2
   exit 1
 fi
 ```
 
+- Single command check.
+
+
 ```bash
-# Multi-command loop check.
 for cmd in git curl docker; do
     if ! command -v "$cmd" &> /dev/null; then
     echo "Error: Required command '$cmd' is not found in PATH." >&2
@@ -53,31 +54,34 @@ for cmd in git curl docker; do
 done
 ```
 
+- Multi-command loop check.
+
+
 ### Argument & Input
 
-#### Required Number of Arguments
-
-Ensures more than, fewer than, or exactly an amount of arguments are present.
+Required number of arguments.
 
 ```bash
-# Requires exactly 2 arguments.
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <source_dir> <target_dir>" >&2
   exit 1
 fi
 ```
 
+- Requires exactly 2 arguments.
+
+
 ```bash
-# Requires at least 1 argument.
 if [[ $# -lt 1 ]]; then
   echo "Error: At least one argument is required." >&2
   exit 1
 fi
 ```
 
-#### Non-Empty Argument Check
+- Requires at least 1 argument.
 
-Ensures an argument is not empty.
+
+Non-Empty Argument Check.
 
 ```bash
 if [[ -z "${1:-}" ]]; then
@@ -86,9 +90,10 @@ if [[ -z "${1:-}" ]]; then
 fi
 ```
 
-#### Numeric Input Validation
+- Ensures an argument is not empty.
 
-Check that a variable or value is numeric.
+
+Numeric Input Validation
 
 ```bash
 local input_val="$1"
@@ -98,13 +103,16 @@ if ! [[ "$input_val" =~ ^[0-9]+$ ]]; then
 fi
 ```
 
-#### Alpha Input Validation
+-Check that a variable or value is numeric.
 
-Check that a variable or value is not numeric.
+
+Alpha Input Validation
 
 ```bash
 echo 'This is a placeholder'
 ```
+
+- Check that a variable or value is not numeric.
 
 ### File System & Path
 

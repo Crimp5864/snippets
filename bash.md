@@ -11,7 +11,9 @@ Defensive programming patterns used at the beginning of a script to fail fast, e
 #### Require root
 
 Ensures script is run as root.
+
 ```bash
+# Require root.
 if [ "$EUID" -ne 0 ]; then
   echo "Error: This script must be run as root (or with sudo)." >&2
   exit 1
@@ -21,7 +23,9 @@ fi
 #### Prevent root
 
 Ensures script is not run as root.
+
 ```bash
+# Prevent root.
 if [ "$EUID" -eq 0 ]; then
   echo "Error: Do not run this script as root." >&2
   exit 1
@@ -30,7 +34,8 @@ fi
 
 #### Dependency / Command availability check
 
-Verifies required CLI utilities are installed
+Verifies required CLI utilities are installed.
+
 ```bash
 # Single command check.
 if ! command -v jq &> /dev/null; then
@@ -52,6 +57,8 @@ done
 
 #### Required Number of Arguments
 
+Ensures more than, fewer than, or exactly an amount of arguments are present.
+
 ```bash
 # Requires exactly 2 arguments.
 if [[ $# -ne 2 ]]; then
@@ -70,6 +77,8 @@ fi
 
 #### Non-Empty Argument Check
 
+Ensures an argument is not empty.
+
 ```bash
 if [[ -z "${1:-}" ]]; then
   echo "Error: Argument 1 cannot be empty." >&2
@@ -78,6 +87,8 @@ fi
 ```
 
 #### Numeric Input Validation
+
+Check that a variable or value is numeric.
 
 ```bash
 local input_val="$1"
@@ -90,7 +101,9 @@ fi
 ## Variables Assignments
 
 ### Script root
+
 Used for installation scripts or similar to define the script root for relative paths.
+
 ```bash
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ```

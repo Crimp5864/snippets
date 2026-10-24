@@ -18,7 +18,6 @@ fi
 
 - Ensures script is run as root.
 
-
 Prevent root
 
 ```bash
@@ -30,7 +29,6 @@ fi
 ```
 
 - Ensures script is not run as root.
-
 
 ## Dependency / Command availability check
 
@@ -45,7 +43,6 @@ fi
 
 - Single command check.
 
-
 ```bash
 for cmd in git curl docker; do
     if ! command -v "$cmd" &> /dev/null; then
@@ -55,7 +52,6 @@ done
 ```
 
 - Multi-command loop check.
-
 
 ### Argument & Input
 
@@ -70,7 +66,6 @@ fi
 
 - Requires exactly 2 arguments.
 
-
 ```bash
 if [[ $# -lt 1 ]]; then
   echo "Error: At least one argument is required." >&2
@@ -79,7 +74,6 @@ fi
 ```
 
 - Requires at least 1 argument.
-
 
 Non-Empty Argument Check.
 
@@ -91,7 +85,6 @@ fi
 ```
 
 - Ensures an argument is not empty.
-
 
 Numeric Input Validation
 
@@ -105,8 +98,7 @@ fi
 
 -Check that a variable or value is numeric.
 
-
-Alpha Input Validation
+Alphabetic Input Validation
 
 ```bash
 echo 'This is a placeholder'
@@ -114,11 +106,9 @@ echo 'This is a placeholder'
 
 - Check that a variable or value is not numeric.
 
-### File System & Path
+## File System & Path
 
-#### Directory Existence
-
-Ensures a target directory exitst before changing into or reading from it.
+Directory Existence
 
 ```bash
 # Early exit/return if directory does not exist.
@@ -127,6 +117,8 @@ if [[ ! -d "$TARGET_DIR" ]]; then
   exit 1
 fi
 ```
+
+- Ensures a target directory exitst before changing into or reading from it.
 
 ## Variables Assignments
 

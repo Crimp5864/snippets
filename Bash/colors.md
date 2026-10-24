@@ -1,4 +1,4 @@
-# Bash colors
+# Color Codes
 
 Colors require either `\e` or `\033`, the former being the more bash specific option. <br>
 Code structure is: `\e[<STYLE>;<COLOR>m<Text here>\e[0m` <br>

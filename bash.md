@@ -98,6 +98,28 @@ if ! [[ "$input_val" =~ ^[0-9]+$ ]]; then
 fi
 ```
 
+#### Alpha Input Validation
+
+Check that a variable or value is not numeric.
+
+```bash
+echo 'This is a placeholder'
+```
+
+### File System & Path
+
+#### Directory Existence
+
+Ensures a target directory exitst before changing into or reading from it.
+
+```bash
+# Early exit/return if directory does not exist.
+if [[ ! -d "$TARGET_DIR" ]]; then
+  echo "Error: Directory '$TARGET_DIR' does not exist." >&2
+  exit 1
+fi
+```
+
 ## Variables Assignments
 
 ### Script root

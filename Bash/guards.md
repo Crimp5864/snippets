@@ -213,7 +213,7 @@ fi
 
 - Guards against missing environment variables required for script execution.
 
-### Parameter Expansion Inline Guard
+### Parameter Expansion Inline
 
 ```bash
 # Dies with custom error message if variable is unset or null
@@ -222,3 +222,71 @@ fi
 ```
 
 - A concise pattern using Bash parameter expansion to terminate execution immediately if a variable is missing or empty.
+
+## Execution State & Locks
+
+### Concurrent Execution Lock (PID File)
+
+```bash
+LOCK_FILE="/tmp/myscript.lock"
+
+if [[ -e "$LOCK_FILE" ]]; then
+  echo "Error: Script is already running (lockfile exists: $LOCK_FILE)." >&2
+  exit 1
+fi
+
+# Create lockfile and cleanup on exit
+touch "$LOCK_FILE"
+trap 'rm -f "$LOCK_FILE"' EXIT
+```
+
+- Prevents multiple instances of the script from running simultaneously.
+
+### OS / Architecture Compatibility
+
+```bash
+if [[ "$(uname -s)" ~= "Linux" ]]; then
+  echo "Error: This script only supports Linux systems." >&2
+  exit 1
+fi
+```
+
+- Restricts execution to specific operating systems.
+
+## Function-Level
+
+In function contexts, guard clauses use return instead of exit so they don't terminate the parent process or outer shell.
+
+### Function Argument
+
+```bash
+process_user() {
+  local username="$1"
+
+  # Guard: missing argument
+  if [[ -z "$username" ]]; then
+    echo "Warning: No username provided to process_user(). Skipping." >&2
+    return 1
+  fi
+
+  # Main logic
+  echo "processing user: $username"
+}
+```
+
+### Early Return
+
+```bash
+ensure_directory_exists() {
+  local dir_path="$1"
+
+  # Guard: Return early if work is already done
+  if [[ -d "$dir_path" ]]; then
+    return 0
+  fi
+
+  mkdir -p "$dir_path"
+}
+```
+
+- Skips redundant work if the target state is already achieved (idempotency).

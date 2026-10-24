@@ -141,20 +141,7 @@ if ! [[ "$input_val" =~ ^[a-zA-Z0-9_]+$ ]]; then
 fi
 ```
 
-- Check that a variable or value is only a word only.
-
-Word Input Validation
-
-```bash
-# Validate word input.
-local input_val="$1"
-if ! [[ "$input_val" =~ ^[a-zA-Z0-9_]+$ ]]; then
-  echo "Error: Parameter '$input_val' must be a word only." >&2
-  exit 1
-fi
-```
-
-- Check that a variable or value is not alphabetic only.
+- Check that a variable or value is only a word.
 
 ## File System & Path
 
@@ -178,5 +165,37 @@ if [[ ! -f "$CONFIG_FILE" ]]; then
   echo "Error: Configuration file '$CONFIG_FILE' not found." >&2
   exit 1
 fi
+```
 
 -  Guards scripts that require reading or modifying a specific file.
+
+Read Access
+
+```bash
+# Check read access
+if [[ ! -r "$INPUT_FILE" ]]; then
+  echo "Error: Cannot read '$INPUT_FILE' (permission denied." >&2
+  exit 1
+fi
+```
+
+- Exits if read permission is denied.
+
+Write Access
+
+```bash
+# Check write access
+if [[ ! -w "$LOG_DIR" ]]; then
+  echo "Error: Cannot write to '$LOG_DIR' (permission denied)." >&2
+  exit 1
+fi
+```
+
+- Exits if write permission is denied.
+
+Safe Directory Change
+
+```bash
+# Guard a cd execution
+cd "$WORK_DIR" || { echo "Error: Failed to enter directory '$WORK_DIR'."; exit 1; )
+```

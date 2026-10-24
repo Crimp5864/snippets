@@ -6,7 +6,7 @@ conditions are not met.
 
 ## Environment & Privilege
 
-Require root
+### Require root
 
 ```bash
 # Require root.
@@ -18,7 +18,7 @@ fi
 
 - Ensures script is run as root.
 
-Prevent root
+### Prevent root
 
 ```bash
 # Prevent root.
@@ -32,7 +32,7 @@ fi
 
 ## Dependency / Command availability check
 
-Verify required CLI utilities are installed.
+### Verify required CLI utilities are installed.
 
 ```bash
 # Verify single required command.
@@ -57,7 +57,7 @@ done
 
 ### Argument & Input
 
-Required number of arguments.
+### Required number of arguments.
 
 ```bash
 # Require specific number of arguments.
@@ -79,7 +79,7 @@ fi
 
 - Requires at least 1 argument.
 
-Non-Empty Argument Check.
+### Non-Empty Argument Check.
 
 ```bash
 # Check for empty argument.
@@ -91,7 +91,7 @@ fi
 
 - Ensures an argument is not empty.
 
-Alphabetic Input Validation
+### Alphabetic Input Validation
 
 ```bash
 # Validate alphabetic input.
@@ -104,7 +104,7 @@ fi
 
 - Check that a variable or value is alphabetic only.
 
-Numeric Input Validation
+### Numeric Input Validation
 
 ```bash
 # Validate numeric input.
@@ -117,7 +117,7 @@ fi
 
 -Check that a variable or value is numeric only.
 
-Alphanumeric Input Validation
+### Alphanumeric Input Validation
 
 ```bash
 # Validate alphanumeric input.
@@ -130,7 +130,7 @@ fi
 
 - Check that a variable or value is alphanumeric only.
 
-Word Input Validation
+### Word Input Validation
 
 ```bash
 # Validate word input.
@@ -145,7 +145,7 @@ fi
 
 ## File System & Path
 
-Directory Existence
+### Directory Existence
 
 ```bash
 # Early exit/return if directory does not exist.
@@ -157,7 +157,7 @@ fi
 
 - Ensures a target directory exitst before changing into or reading from it.
 
-File Existence
+### File Existence
 
 ```bash
 # Early exit/return if file does not exist.
@@ -169,7 +169,7 @@ fi
 
 -  Guards scripts that require reading or modifying a specific file.
 
-Read Access
+### Read Access
 
 ```bash
 # Check read access
@@ -181,7 +181,7 @@ fi
 
 - Exits if read permission is denied.
 
-Write Access
+### Write Access
 
 ```bash
 # Check write access
@@ -193,9 +193,32 @@ fi
 
 - Exits if write permission is denied.
 
-Safe Directory Change
+### Safe Directory Change
 
 ```bash
 # Guard a cd execution
 cd "$WORK_DIR" || { echo "Error: Failed to enter directory '$WORK_DIR'."; exit 1; )
 ```
+
+## Environment Variables
+
+### Ensure Variable is Set and Non-Empty
+
+```bash
+if [[ -z "${DATABASE_URL:-}" ]]; then
+  echo "Error: DATABASE_URL environment variable is not set." >&2
+  exit 1
+fi
+```
+
+- Guards against missing environment variables required for script execution.
+
+### Parameter Expansion Inline Guard
+
+```bash
+# Dies with custom error message if variable is unset or null
+: "${API_KEY:?Error: API_KEY environment variable must be set.}"
+: "${DEPLOY_ENV:?Error: DEPLOY_ENV environment variable must be set.}"
+```
+
+- A concise pattern using Bash parameter expansion to terminate execution immediately if a variable is missing or empty.

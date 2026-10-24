@@ -1,8 +1,4 @@
-# Variables
-
-Variable assignments
-
----
+# Variables Assignments
 
 Script root                                                                 
                                                                                 

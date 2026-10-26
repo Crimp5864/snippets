@@ -19,6 +19,21 @@ name="${1:-default_value}"
 config_file="${config_file:=/etc/app.conf}"
 ```
 
+### Error out if a required variable is missing (`:?`):
+
+```bash
+# Exits the script with an error message if API_KEY isn't set.
+api_key="${API_KEY:?Error: API_KEY environment variable is required.}"
+```
+
+### Use an alternative value only if it is set (`:+`)
+
+```bash
+# If VERBOSE is set, assign "--verbose", otherwise leave empty.
+verbose_flag="{VERBOSE:+--verbose}
+```bash
+
+
 
 
 Script root                                                                 

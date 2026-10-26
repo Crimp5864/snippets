@@ -33,6 +33,60 @@ api_key="${API_KEY:?Error: API_KEY environment variable is required.}"
 verbose_flag="{VERBOSE:+--verbose}
 ```bash
 
+## Command & Arithmetic Substitution
+
+Standard ways to capture outputs and compute numbers.
+
+### Command Substitution
+
+```bash
+# Capture output of a command (prefer $() over backticks).
+current_date=$( date +%Y-%m-%d )
+```
+
+### Arithmetic Evaluation
+
+```bash
+# Evaluate math expressions cleanly
+tota=$(( price * quantity ))
+
+# Increment a counter inline
+(( count++ ))
+```
+
+## String Manipulation on Assignment
+
+Modify strings on the fly as they are assigned and avoid external tools \
+like `sed` or `awk`.
+
+### String Length
+
+```bash
+length="${#my_string}"
+```
+
+### Substring Extraction (`offset:length`)
+
+```bash
+# Grab 4 characters starting from index 2.
+sub"${my_string:2:4}"
+```
+
+### Search & Replace
+
+```bash
+path="/home/user/my folder"
+# Replace spaces with underscores globally
+clean_path="${path// /_}"
+```
+
+### Strip prefixes/suffixes (Path manipulation).
+
+```bash
+filename="/path/to/script.sh"
+just_name="${filename***/}" # Removes everything up to the last slash -> script.sh.
+just_ext="${filename##*.}   # Remove everything up to the dot > sh.
+```
 
 
 

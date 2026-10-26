@@ -5,7 +5,7 @@
 These patterns check if a variable is unset or null (empty) and handle it \
 gradefully.
 
-### Use a default value if unset or empty ( :- ):
+### Use a default value if unset or empty (`:-`):
 
 ``` bash
 # If $1 is unset or empty, use "default_value".

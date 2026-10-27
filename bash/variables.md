@@ -84,9 +84,30 @@ clean_path="${path// /_}"
 
 ```bash
 filename="/path/to/script.sh"
-just_name="${filename***/}" # Removes everything up to the last slash -> script.sh.
-just_ext="${filename##*.}   # Remove everything up to the dot > sh.
+just_name="${filename##*/}" # Removes everything up to the last slash -> script.sh
+just_ext="${filename##*.}   # Remove everything up to the dot > sh
+just_root="${filename%/*}" # Removes everything from the last slash -> /path/to
 ```
+
+## Scoping & Safety Patterns
+
+Good habits for defining variables cleanly inside scripts and functions
+
+### Local Scoping (inside functions):
+
+```bash
+my_function() {
+  # Prevents leaking variables into global scope.
+  local result="local data"
+}
+```
+
+### Read only (Constants):
+
+```bash
+readonly MAX_RETRIES=5
+```
+
 
 
 
